@@ -1,6 +1,46 @@
 // Put any @imports here
 // See Readme for a list of supported ones
+@import "foundation";
+@import 'bourbon';
+@import 'neat';
+
+// Cherry Bomb Colors
+$greyDark: #212021;
 
 body {
-  background: #e2ebf3;
+  @include outer-container;
+  background: #fff;
+  margin-left: 0;
+  margin-right: 0;
+
+
+  ///////////// top navigation area ///////////
+
+  .searchForm {
+    width: 30%;
+  }
+
+  h1.logo {
+    color: #fff;
+  }
+
+  //////////// side navigation area /////////////
+
+  .side-nav {
+    @include span-columns(3);
+    color: #fff;
+    background: $greyDark;
+  }
+
+  .container {
+    width: 500px;
+    margin: 15px auto;
+  }
+
+  li {
+    cursor: pointer;
+  }
 }
+
+
+
