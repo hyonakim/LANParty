@@ -18,25 +18,39 @@ var config = function config($stateProvider, $urlRouterProvider) {
     templateUrl: 'templates/home.tpl.html'
   }).state('root.about', {
     url: '/About',
-    // controller: 'AboutController',
     templateUrl: 'templates/about.tpl.html'
   }).state('root.contact', {
     url: '/Contact',
-    // controller: 'ContactController',
     templateUrl: 'templates/contact.tpl.html'
-  }).state('root.xboxone', {
-    url: '/XboxOne',
-    controller: 'XboxController',
-    templateUrl: 'templates/xboxone.tpl.html'
-  }).state('root.ps4', {
-    url: '/PS4',
-    // controller: 'PS4Controller',
-    templateUrl: 'templates/ps4.tpl.html'
-  }).state('root.pc', {
-    url: '/PC',
-    // controller: 'PCController',
-    templateUrl: 'templates/pc.tpl.html'
-  }).state('root.single', {
+  }).state('root.add', {
+    url: '/Add',
+    controller: 'AddController',
+    templateUrl: 'templates/add.tpl.html'
+  }).state('root.edit', {
+    url: '/Edit/:gameId',
+    controller: 'EditController',
+    templateUrl: 'templates/edit.tpl.html'
+  })
+
+  // .state('root.xboxone', {
+  //   url: '/XboxOne',
+  //   controller: 'XboxController',
+  //   templateUrl: 'templates/xboxone.tpl.html'
+  // })
+
+  // .state('root.ps4', {
+  //   url: '/PS4',
+  //   // controller: 'PS4Controller',
+  //   templateUrl: 'templates/ps4.tpl.html'
+  // })
+
+  // .state('root.pc', {
+  //   url: '/PC',
+  //   // controller: 'PCController',
+  //   templateUrl: 'templates/pc.tpl.html'
+  // })
+
+  .state('root.single', {
     url: '/single/:gameId',
     controller: 'SingleGameController',
     templateUrl: 'templates/single.tpl.html'
@@ -49,6 +63,48 @@ exports['default'] = config;
 module.exports = exports['default'];
 
 },{}],2:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, '__esModule', {
+  value: true
+});
+var AddController = function AddController($scope, GameService) {
+
+  $scope.addGame = function (obj) {
+    console.log(obj);
+    GameService.addGame(obj).then(function (res) {
+      $scope.newGame = {};
+    });
+  };
+};
+AddController.$inject = ['$scope', 'GameService'];
+exports['default'] = AddController;
+module.exports = exports['default'];
+
+},{}],3:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, '__esModule', {
+  value: true
+});
+var EditController = function EditController($scope, $stateParams, GameService) {
+
+  GameService.singleGame($stateParams.gameId).then(function (res) {
+    $scope.singleGame = res.data;
+  });
+
+  $scope.updateGame = function (obj) {
+    GameService.update(obj).then(function (res) {
+      console.log(res);
+    });
+  };
+};
+
+EditController.$inject = ['$scope', '$stateParams', 'GameService'];
+exports['default'] = EditController;
+module.exports = exports['default'];
+
+},{}],4:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -67,7 +123,7 @@ SingleGameController.$inject = ['$scope', '$stateParams', 'GameService'];
 exports['default'] = SingleGameController;
 module.exports = exports['default'];
 
-},{}],3:[function(require,module,exports){
+},{}],5:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -88,7 +144,7 @@ XboxController.$inject = ['$scope', '$http', 'PARSE'];
 exports['default'] = XboxController;
 module.exports = exports['default'];
 
-},{}],4:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -106,7 +162,7 @@ HomeController.$inject = ['$scope', '$http', 'PARSE', 'GameService'];
 exports['default'] = HomeController;
 module.exports = exports['default'];
 
-},{}],5:[function(require,module,exports){
+},{}],7:[function(require,module,exports){
 'use strict';
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
@@ -137,6 +193,14 @@ var _controllersXboxController = require('./controllers/XboxController');
 
 var _controllersXboxController2 = _interopRequireDefault(_controllersXboxController);
 
+var _controllersAddController = require('./controllers/AddController');
+
+var _controllersAddController2 = _interopRequireDefault(_controllersAddController);
+
+var _controllersEditController = require('./controllers/EditController');
+
+var _controllersEditController2 = _interopRequireDefault(_controllersEditController);
+
 // Services
 
 var _servicesGameService = require('./services/GameService');
@@ -151,9 +215,9 @@ _angular2['default'].module('app', ['ui.router']).constant('PARSE', {
       'X-Parse-REST-API-Key': '7IxlYBLx7qPEIcQej5FERpjBrEGqjwh9bxU8O10M'
     }
   }
-}).config(_config2['default']).service('GameService', _servicesGameService2['default']).controller('HomeController', _controllersHomeController2['default']).controller('SingleGameController', _controllersSingleGameController2['default']).controller('XboxController', _controllersXboxController2['default']);
+}).config(_config2['default']).service('GameService', _servicesGameService2['default']).controller('HomeController', _controllersHomeController2['default']).controller('SingleGameController', _controllersSingleGameController2['default']).controller('XboxController', _controllersXboxController2['default']).controller('AddController', _controllersAddController2['default']).controller('EditController', _controllersEditController2['default']);
 
-},{"./config":1,"./controllers/SingleGameController":2,"./controllers/XboxController":3,"./controllers/home.controller":4,"./services/GameService":6,"angular":9,"angular-ui-router":7}],6:[function(require,module,exports){
+},{"./config":1,"./controllers/AddController":2,"./controllers/EditController":3,"./controllers/SingleGameController":4,"./controllers/XboxController":5,"./controllers/home.controller":6,"./services/GameService":8,"angular":11,"angular-ui-router":9}],8:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -180,6 +244,22 @@ var GameService = function GameService($http, PARSE) {
       cache: true
     });
   };
+
+  var NewGame = function NewGame(obj) {
+    this.image = obj.image;
+    this.title = obj.title;
+    this.rating = obj.rating;
+    this.platform = obj.platform;
+  };
+
+  this.addGame = function (obj) {
+    var newGame = new NewGame(obj);
+    return $http.post(url, newGame, PARSE.CONFIG);
+  };
+
+  this.update = function (obj) {
+    return $http.put(url + '/' + obj.objectId, obj, PARSE.CONFIG);
+  };
 };
 
 GameService.$inject = ['$http', 'PARSE'];
@@ -187,7 +267,7 @@ GameService.$inject = ['$http', 'PARSE'];
 exports['default'] = GameService;
 module.exports = exports['default'];
 
-},{}],7:[function(require,module,exports){
+},{}],9:[function(require,module,exports){
 /**
  * State-based routing for AngularJS
  * @version v0.2.15
@@ -4558,7 +4638,7 @@ angular.module('ui.router.state')
   .filter('isState', $IsStateFilter)
   .filter('includedByState', $IncludedByStateFilter);
 })(window, window.angular);
-},{}],8:[function(require,module,exports){
+},{}],10:[function(require,module,exports){
 /**
  * @license AngularJS v1.4.7
  * (c) 2010-2015 Google, Inc. http://angularjs.org
@@ -33463,11 +33543,11 @@ $provide.value("$locale", {
 })(window, document);
 
 !window.angular.$$csp().noInlineStyle && window.angular.element(document.head).prepend('<style type="text/css">@charset "UTF-8";[ng\\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\\:form{display:block;}.ng-animate-shim{visibility:hidden;}.ng-anchor{position:absolute;}</style>');
-},{}],9:[function(require,module,exports){
+},{}],11:[function(require,module,exports){
 require('./angular');
 module.exports = angular;
 
-},{"./angular":8}]},{},[5])
+},{"./angular":10}]},{},[7])
 
 
 //# sourceMappingURL=main.js.map

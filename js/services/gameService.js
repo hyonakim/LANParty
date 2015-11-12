@@ -19,6 +19,24 @@ let GameService = function($http, PARSE) {
       cache: true
     });
   };
+
+  let NewGame = function (obj) {
+    this.image = obj.image;
+    this.title = obj.title;
+    this.rating = obj.rating;
+    this.platform = obj.platform;
+  };
+
+  this.addGame = function (obj) {
+    let newGame  = new NewGame(obj);
+    return $http.post(url, newGame, PARSE.CONFIG);
+  };
+
+  this.update = function (obj) {
+    return $http.put(
+      url + '/' + obj.objectId, obj, PARSE.CONFIG
+    );
+  };
 };
 
 GameService.$inject = ['$http', 'PARSE'];

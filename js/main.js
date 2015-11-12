@@ -8,6 +8,8 @@ import config from './config';
 import HomeController from './controllers/home.controller';
 import SingleGameController from './controllers/SingleGameController';
 import XboxController from './controllers/XboxController';
+import AddController from './controllers/AddController';
+import EditController from './controllers/EditController';
 
 // Services
 import GameService from './services/GameService';
@@ -28,4 +30,6 @@ angular
   .controller('HomeController', HomeController)
   .controller('SingleGameController', SingleGameController)
   .controller('XboxController', XboxController)
+  .controller('AddController', AddController)
+  .controller('EditController', EditController)
 ;
