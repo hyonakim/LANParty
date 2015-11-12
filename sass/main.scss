@@ -12,12 +12,13 @@ body {
   background: #fff;
   margin-left: 0;
   margin-right: 0;
+  max-width: 100%;
 
 
   ///////////// top navigation area ///////////
 
   .searchForm {
-    width: 30%;
+    width: 100%;
   }
 
   h1.logo {
@@ -33,12 +34,17 @@ body {
   }
 
   .container {
-    width: 500px;
     margin: 15px auto;
   }
 
   li {
     cursor: pointer;
+  }
+
+  .imageGallery {
+    @include span-columns(3);
+    @include omega(6n);
+
   }
 }
 

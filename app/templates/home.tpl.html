@@ -1,11 +1,11 @@
-<h3>{{show}}</h3>
+
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/X5aJfebzkrM" frameborder="0" allowfullscreen></iframe>
 
 <hr>
 
 <ul>
-  <li ng-repeat='game in games'>
-    <a href="#/single//{{game.objectId}}"><img ng-src="{{game.image}}"</a>
+  <li class='imageGallery' ng-repeat='game in games'>
+    <a href="#/single/{{game.objectId}}"><img ng-src="{{game.image}}" /></a>
   </li>
 </ul>

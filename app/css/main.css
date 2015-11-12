@@ -6399,13 +6399,14 @@ body {
   margin-right: auto;
   background: #fff;
   margin-left: 0;
-  margin-right: 0; }
+  margin-right: 0;
+  max-width: 100%; }
   body::after {
     clear: both;
     content: "";
     display: table; }
   body .searchForm {
-    width: 30%; }
+    width: 100%; }
   body h1.logo {
     color: #fff; }
   body .side-nav {
@@ -6418,9 +6419,19 @@ body {
     body .side-nav:last-child {
       margin-right: 0; }
   body .container {
-    width: 500px;
     margin: 15px auto; }
   body li {
     cursor: pointer; }
+  body .imageGallery {
+    float: left;
+    display: block;
+    margin-right: 2.35765%;
+    width: 23.23176%; }
+    body .imageGallery:last-child {
+      margin-right: 0; }
+    body .imageGallery:nth-child(6n) {
+      margin-right: 0; }
+    body .imageGallery:nth-child(6n+1) {
+      clear: left; }
 
 /*# sourceMappingURL=main.css.map */

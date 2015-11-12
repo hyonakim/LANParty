@@ -18,12 +18,28 @@ var config = function config($stateProvider, $urlRouterProvider) {
     templateUrl: 'templates/home.tpl.html'
   }).state('root.about', {
     url: '/About',
-    controller: 'AboutController',
+    // controller: 'AboutController',
     templateUrl: 'templates/about.tpl.html'
   }).state('root.contact', {
     url: '/Contact',
-    controller: 'ContactController',
+    // controller: 'ContactController',
     templateUrl: 'templates/contact.tpl.html'
+  }).state('root.xboxone', {
+    url: '/XboxOne',
+    controller: 'XboxController',
+    templateUrl: 'templates/xboxone.tpl.html'
+  }).state('root.ps4', {
+    url: '/PS4',
+    // controller: 'PS4Controller',
+    templateUrl: 'templates/ps4.tpl.html'
+  }).state('root.pc', {
+    url: '/PC',
+    // controller: 'PCController',
+    templateUrl: 'templates/pc.tpl.html'
+  }).state('root.single', {
+    url: '/single/:gameId',
+    controller: 'SingleGameController',
+    templateUrl: 'templates/single.tpl.html'
   });
 };
 
@@ -38,22 +54,59 @@ module.exports = exports['default'];
 Object.defineProperty(exports, '__esModule', {
   value: true
 });
-var HomeController = function HomeController($scope, $http, PARSE) {
+
+var SingleGameController = function SingleGameController($scope, $stateParams, GameService) {
+
+  GameService.SingleGame($stateParams.gameId).then(function (res) {
+    $scope.singleGame = res.data;
+  });
+};
+
+SingleGameController.$inject = ['$scope', '$stateParams', 'GameService'];
+
+exports['default'] = SingleGameController;
+module.exports = exports['default'];
+
+},{}],3:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, '__esModule', {
+  value: true
+});
+var XboxController = function XboxController($scope, $http, PARSE) {
 
   var url = PARSE.URL + 'classes/VideoGames';
 
   $http.get(url, PARSE.CONFIG).then(function (resp) {
     console.log(resp);
-    $scope.games = resp.data.results;
+    $scope.games = resp.data.results.platform;
   });
 };
 
-HomeController.$inject = ['$scope', '$http', 'PARSE'];
+XboxController.$inject = ['$scope', '$http', 'PARSE'];
+
+exports['default'] = XboxController;
+module.exports = exports['default'];
+
+},{}],4:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, '__esModule', {
+  value: true
+});
+var HomeController = function HomeController($scope, $http, PARSE, GameService) {
+
+  GameService.VideoGames().then(function (res) {
+    $scope.games = res.data.results;
+  });
+};
+
+HomeController.$inject = ['$scope', '$http', 'PARSE', 'GameService'];
 
 exports['default'] = HomeController;
 module.exports = exports['default'];
 
-},{}],3:[function(require,module,exports){
+},{}],5:[function(require,module,exports){
 'use strict';
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
@@ -76,6 +129,20 @@ var _controllersHomeController = require('./controllers/home.controller');
 
 var _controllersHomeController2 = _interopRequireDefault(_controllersHomeController);
 
+var _controllersSingleGameController = require('./controllers/SingleGameController');
+
+var _controllersSingleGameController2 = _interopRequireDefault(_controllersSingleGameController);
+
+var _controllersXboxController = require('./controllers/XboxController');
+
+var _controllersXboxController2 = _interopRequireDefault(_controllersXboxController);
+
+// Services
+
+var _servicesGameService = require('./services/GameService');
+
+var _servicesGameService2 = _interopRequireDefault(_servicesGameService);
+
 _angular2['default'].module('app', ['ui.router']).constant('PARSE', {
   URL: 'https://api.parse.com/1/',
   CONFIG: {
@@ -84,9 +151,43 @@ _angular2['default'].module('app', ['ui.router']).constant('PARSE', {
       'X-Parse-REST-API-Key': '7IxlYBLx7qPEIcQej5FERpjBrEGqjwh9bxU8O10M'
     }
   }
-}).config(_config2['default']).controller('HomeController', _controllersHomeController2['default']);
+}).config(_config2['default']).service('GameService', _servicesGameService2['default']).controller('HomeController', _controllersHomeController2['default']).controller('SingleGameController', _controllersSingleGameController2['default']).controller('XboxController', _controllersXboxController2['default']);
 
-},{"./config":1,"./controllers/home.controller":2,"angular":6,"angular-ui-router":4}],4:[function(require,module,exports){
+},{"./config":1,"./controllers/SingleGameController":2,"./controllers/XboxController":3,"./controllers/home.controller":4,"./services/GameService":6,"angular":9,"angular-ui-router":7}],6:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, '__esModule', {
+  value: true
+});
+var GameService = function GameService($http, PARSE) {
+
+  var url = PARSE.URL + 'classes/VideoGames';
+
+  this.VideoGames = function () {
+    return $http({
+      url: url,
+      method: 'GET',
+      headers: PARSE.CONFIG.headers,
+      cache: true
+    });
+  };
+
+  this.SingleGame = function (gameId) {
+    return $http({
+      url: url + '/' + gameId,
+      method: 'GET',
+      headers: PARSE.CONFIG.headers,
+      cache: true
+    });
+  };
+};
+
+GameService.$inject = ['$http', 'PARSE'];
+
+exports['default'] = GameService;
+module.exports = exports['default'];
+
+},{}],7:[function(require,module,exports){
 /**
  * State-based routing for AngularJS
  * @version v0.2.15
@@ -4457,7 +4558,7 @@ angular.module('ui.router.state')
   .filter('isState', $IsStateFilter)
   .filter('includedByState', $IncludedByStateFilter);
 })(window, window.angular);
-},{}],5:[function(require,module,exports){
+},{}],8:[function(require,module,exports){
 /**
  * @license AngularJS v1.4.7
  * (c) 2010-2015 Google, Inc. http://angularjs.org
@@ -33362,11 +33463,11 @@ $provide.value("$locale", {
 })(window, document);
 
 !window.angular.$$csp().noInlineStyle && window.angular.element(document.head).prepend('<style type="text/css">@charset "UTF-8";[ng\\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\\:form{display:block;}.ng-animate-shim{visibility:hidden;}.ng-anchor{position:absolute;}</style>');
-},{}],6:[function(require,module,exports){
+},{}],9:[function(require,module,exports){
 require('./angular');
 module.exports = angular;
 
-},{"./angular":5}]},{},[3])
+},{"./angular":8}]},{},[5])
 
 
 //# sourceMappingURL=main.js.map

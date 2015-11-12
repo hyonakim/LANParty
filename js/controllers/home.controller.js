@@ -1,14 +1,11 @@
-let HomeController = function($scope, $http, PARSE) {
+let HomeController = function($scope, $http, PARSE, GameService) {
   
-  let url = PARSE.URL + 'classes/VideoGames';
-
-  $http.get(url, PARSE.CONFIG).then( (resp) => {
-    console.log(resp);
-    $scope.games = resp.data.results; 
+  GameService.VideoGames().then ( (res) => {
+    $scope.games = res.data.results;
   });
 
 };
 
-HomeController.$inject = ['$scope', '$http', 'PARSE'];
+HomeController.$inject = ['$scope', '$http', 'PARSE', 'GameService'];
 
 export default HomeController;

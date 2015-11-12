@@ -6,6 +6,11 @@ import config from './config';
 
 // Controllers
 import HomeController from './controllers/home.controller';
+import SingleGameController from './controllers/SingleGameController';
+import XboxController from './controllers/XboxController';
+
+// Services
+import GameService from './services/GameService';
 
 angular
   .module('app', ['ui.router'])
@@ -19,5 +24,8 @@ angular
     }
   })
   .config(config)
+  .service('GameService', GameService)
   .controller('HomeController', HomeController)
+  .controller('SingleGameController', SingleGameController)
+  .controller('XboxController', XboxController)
 ;
