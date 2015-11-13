@@ -6405,33 +6405,101 @@ body {
     clear: both;
     content: "";
     display: table; }
-  body .searchForm {
+  body p {
+    font-size: 20px; }
+  body .container {
+    margin: 15px auto; }
+    body .container li {
+      cursor: pointer; }
+  body header {
+    background: #2F302F;
+    position: fixed;
+    top: -8px;
     width: 100%; }
-  body h1.logo {
-    color: #fff; }
+  body .top-bar {
+    height: 131px; }
+    body .top-bar .lanLogo {
+      width: 50%;
+      margin-left: 2%;
+      margin-top: 4%; }
+    body .top-bar .searchForm {
+      width: 50%; }
+    body .top-bar .top-bar-section {
+      margin-top: 80px;
+      margin-right: 1%; }
   body .side-nav {
     float: left;
     display: block;
     margin-right: 2.35765%;
     width: 23.23176%;
     color: #fff;
-    background: #212021; }
+    background: #212021;
+    position: fixed;
+    left: 0;
+    top: 270px;
+    bottom: 242px;
+    padding: 10px;
+    position: fixed;
+    width: 130px;
+    height: 55px; }
     body .side-nav:last-child {
       margin-right: 0; }
-  body .container {
-    margin: 15px auto; }
-  body li {
-    cursor: pointer; }
-  body .imageGallery {
-    float: left;
-    display: block;
-    margin-right: 2.35765%;
-    width: 23.23176%; }
-    body .imageGallery:last-child {
-      margin-right: 0; }
-    body .imageGallery:nth-child(6n) {
-      margin-right: 0; }
-    body .imageGallery:nth-child(6n+1) {
-      clear: left; }
+  body .side-nav li a:not(.button) {
+    color: #fff; }
+  body .side-nav li a:not(.button):hover {
+    color: #FF081B; }
+  body .mainPage {
+    margin-left: 20%;
+    margin-top: 15%; }
+    body .mainPage .falloutTitle {
+      margin-left: 16%; }
+    body .mainPage .youtubeVid {
+      margin-top: 2%;
+      margin-left: 12%; }
+    body .mainPage .lan {
+      margin-left: 1%;
+      color: #FF081B; }
+    body .mainPage .imageGallery {
+      height: 125px;
+      width: 221px;
+      overflow: hidden;
+      display: inline-block; }
+      body .mainPage .imageGallery .thumbnail {
+        margin-left: 5%; }
+      body .mainPage .imageGallery img.thumbnail:hover {
+        color: #7D7D7D; }
+  body .singleContainer {
+    margin-left: 25%;
+    margin-top: 15%; }
+    body .singleContainer .singleTitle {
+      color: #FF081B; }
+    body .singleContainer .singleImage {
+      width: 60%;
+      margin-bottom: 5%; }
+    body .singleContainer .update {
+      color: #FF081B;
+      background: #212021; }
+    body .singleContainer .update:hover {
+      color: #fff; }
+  body .gaming {
+    height: 200px;
+    margin-left: 5%; }
+  body .about {
+    margin-top: 5%;
+    width: 80%;
+    font-size: 16px; }
+  body .contactPage {
+    margin-top: 15%;
+    width: 70%; }
+  body .addPage {
+    margin-top: 15%;
+    width: 70%; }
+    body .addPage p span .rating {
+      color: #FF081B; }
+    body .addPage .addGameBtn {
+      background: #7D7D7D; }
+  body .updatePage {
+    margin-top: 15%;
+    width: 70%; }
 
 /*# sourceMappingURL=main.css.map */

@@ -1,11 +1,17 @@
 
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/X5aJfebzkrM" frameborder="0" allowfullscreen></iframe>
+<section class='mainPage'>
 
-<hr>
+<h3 class='falloutTitle'>Check out the all new Fallout 4 trailer!</h3>
 
-<ul>
-  <li class='imageGallery' ng-repeat='game in games'>
-    <a href="#/single/{{game.objectId}}"><img ng-src="{{game.image}}" /></a>
-  </li>
-</ul>
+  <iframe class='youtubeVid' width="560" height="315" src="https://www.youtube.com/embed/X5aJfebzkrM" frameborder="0" allowfullscreen></iframe>
+
+  <hr>
+
+  <ul>
+  <h3 class='lan'>LAN Party Community Game Collection</h3>
+    <li class='imageGallery' ng-repeat='game in games'>
+      <a href="#/single/{{game.objectId}}"><img class='thumbnail' ng-src="{{game.image}}" /></a>
+    </li>
+  </ul>
+</section>

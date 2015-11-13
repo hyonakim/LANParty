@@ -1,16 +1,17 @@
-let EditController = function($scope, $stateParams, GameService) {
+let EditController = function($scope, $stateParams, GameService, $state) {
   
-  GameService.singleGame($stateParams.gameId).then( (res) => {
+  GameService.SingleGame($stateParams.gameId).then( (res) => {
     $scope.singleGame = res.data;
   });
 
   $scope.updateGame = function (obj) {
     GameService.update(obj).then( (res) => {
       console.log(res);
+      $state.go('root.home');
     });
   };
 
 };
 
-EditController.$inject = ['$scope', '$stateParams', 'GameService'];
+EditController.$inject = ['$scope', '$stateParams', 'GameService', '$state'];
 export default EditController;

@@ -87,20 +87,21 @@ module.exports = exports['default'];
 Object.defineProperty(exports, '__esModule', {
   value: true
 });
-var EditController = function EditController($scope, $stateParams, GameService) {
+var EditController = function EditController($scope, $stateParams, GameService, $state) {
 
-  GameService.singleGame($stateParams.gameId).then(function (res) {
+  GameService.SingleGame($stateParams.gameId).then(function (res) {
     $scope.singleGame = res.data;
   });
 
   $scope.updateGame = function (obj) {
     GameService.update(obj).then(function (res) {
       console.log(res);
+      $state.go('root.home');
     });
   };
 };
 
-EditController.$inject = ['$scope', '$stateParams', 'GameService'];
+EditController.$inject = ['$scope', '$stateParams', 'GameService', '$state'];
 exports['default'] = EditController;
 module.exports = exports['default'];
 
@@ -111,14 +112,21 @@ Object.defineProperty(exports, '__esModule', {
   value: true
 });
 
-var SingleGameController = function SingleGameController($scope, $stateParams, GameService) {
+var SingleGameController = function SingleGameController($scope, $stateParams, GameService, $state) {
 
   GameService.SingleGame($stateParams.gameId).then(function (res) {
     $scope.singleGame = res.data;
   });
+
+  $scope.deleteMe = function (obj) {
+    GameService['delete'](obj).then(function (res) {
+      alert('Are you sure?');
+      $state.go('root.home');
+    });
+  };
 };
 
-SingleGameController.$inject = ['$scope', '$stateParams', 'GameService'];
+SingleGameController.$inject = ['$scope', '$stateParams', 'GameService', '$state'];
 
 exports['default'] = SingleGameController;
 module.exports = exports['default'];
@@ -259,6 +267,10 @@ var GameService = function GameService($http, PARSE) {
 
   this.update = function (obj) {
     return $http.put(url + '/' + obj.objectId, obj, PARSE.CONFIG);
+  };
+
+  this['delete'] = function (obj) {
+    return $http['delete'](url + '/' + obj.objectId, PARSE.CONFIG);
   };
 };
 

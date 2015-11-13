@@ -37,6 +37,12 @@ let GameService = function($http, PARSE) {
       url + '/' + obj.objectId, obj, PARSE.CONFIG
     );
   };
+
+  this.delete = function (obj) {
+    return $http.delete(
+      url + '/' + obj.objectId, PARSE.CONFIG
+    );
+  };
 };
 
 GameService.$inject = ['$http', 'PARSE'];

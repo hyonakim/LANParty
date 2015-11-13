@@ -1,9 +1,13 @@
 
-<img src="{{singleGame.image}}">
-<h3>{{singleGame.title}}</h3>
+<div class='singleContainer'>
+<h3 class='singleTitle'>{{singleGame.title}}</h3>
+<img class='singleImage' src="{{singleGame.image}}">
 
-<p>{{singleGame.rating}}</p>
+<hr>
+
+<p><span class='rating'>Rating:</span> {{singleGame.rating}}</p>
 <p>Available Platforms: <span>{{singleGame.platform}}</span></p>
 
-<a href="#/Edit/{{ singleGame.objectId }}">Update Game Information</a> 
-
+<a href="#/Edit/{{ singleGame.objectId }}" class='update button radius'>Update Game Information</a>
+<a href="#" ng-click="deleteMe(singleGame)" class='update button radius'>Delete Game Information</a> 
+</div>
